@@ -582,7 +582,7 @@
   <button class="hamburguesa" onclick="toggleMenu()">☰</button>
   <div class="menu" id="menu">
     <h2>Menú</h2>
-    <a href="inicio.html" class="active">Inicio</a>
+    <a href="index.html" class="active">Inicio</a>
     <a href="labio_leporino.html">Información de L.L</a>
     <a href="paladar_hendido.html">Información de P.H</a>
     <a href="campañas.html">Campañas y Apoyo</a>
