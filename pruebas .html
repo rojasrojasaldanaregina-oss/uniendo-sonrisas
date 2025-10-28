@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Centros de Apoyo — La Paz & El Alto</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;600;800&display=swap"
+      rel="stylesheet" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <style>
+      body {
+        margin: 0;
+        font-family: "Rubik", sans-serif;
+        background: linear-gradient(135deg, #5f72bd, #9b23ea);
+        color: #fff;
+        min-height: 100vh;
+        overflow-x: hidden;
+      }
+      header {
+        text-align: center;
+        padding: 2rem 1rem;
+        animation: fadeIn 1.5s ease;
+      }
+      header h1 {
+        font-size: 2rem;
+        margin: 0 0 0.3rem;
+      }
+      header p {
+        color: #e6e6e6;
+      }
+      .container {
+        max-width: 1200px;
+        margin: auto;
+        padding: 20px;
+        animation: slideUp 1.5s ease;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 24px;
+      }
+      .card {
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 20px;
+        padding: 20px;
+        backdrop-filter: blur(8px);
+        transition: 0.3s;
+        overflow: hidden;
+      }
+      .card:hover {
+        background: rgba(255, 255, 255, 0.2);
+        transform: translateY(-5px);
+      }
+      .card img {
+        width: 100%;
+        border-radius: 12px;
+        margin-bottom: 10px;
+        height: 180px;
+        object-fit: cover;
+      }
+      .card h3 {
+        margin-top: 0;
+        color: #fff;
+      }
+      .btn {
+        display: inline-block;
+        background: white;
+        color: #5f72bd;
+        padding: 8px 12px;
+        border-radius: 10px;
+        font-weight: 600;
+        text-decoration: none;
+        margin-top: 8px;
+        transition: 0.3s;
+      }
+      .btn:hover {
+        background: #fff2;
+        color: white;
+      }
+      footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        flex-wrap: wrap;
+        text-align: center;
+        color: #ddd;
+        padding: 1.5rem;
+        font-size: 0.9rem;
+        margin-top: 40px;
+        background: rgba(255, 255, 255, 0.08);
+        border-top: 1px solid rgba(255, 255, 255, 0.2);
+      }
+      .perfil {
+        flex: 1;
+        min-width: 250px;
+        padding: 10px;
+      }
+      .perfil h3 {
+        color: white;
+        margin-bottom: 5px;
+      }
+      .social a {
+        margin: 0 6px;
+        display: inline-block;
+        color: white;
+        background: rgba(255, 255, 255, 0.2);
+        padding: 10px;
+        border-radius: 50%;
+        transition: 0.3s;
+      }
+      .social a:hover {
+        background: white;
+        color: #5f72bd;
+      }
+      .btn-atras {
+        position: fixed;
+        bottom: 20px;
+        left: 20px;
+        background: white;
+        color: #5f72bd;
+        border: none;
+        padding: 12px 18px;
+        border-radius: 30px;
+        font-weight: 600;
+        cursor: pointer;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        transition: 0.3s;
+      }
+      .btn-atras:hover {
+        background: #f1f1f1;
+        transform: scale(1.05);
+      }
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+      @keyframes slideUp {
+        from {
+          opacity: 0;
+          transform: translateY(40px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <button class="btn-atras" onclick="window.history.back()">
+      <i class="fa-solid fa-arrow-left"></i> Atrás
+    </button>
+    <header>
+      <h1>🏥 Centros de Atención — La Paz y El Alto</h1>
+      <p>
+        Fundaciones, hospitales y campañas que brindan apoyo a pacientes con
+        Labio Leporino y Paladar Hendido.
+      </p>
+    </header>
+    <div class="container">
+      <div class="grid">
+        <div class="card">
+          <img
+            src="img/operacion-sonrisa.jpg"
+            alt="Operación Sonrisa Bolivia" />
+          <h3>Operación Sonrisa Bolivia</h3>
+          <p>
+            Realiza campañas anuales de cirugías gratuitas en distintos
+            hospitales de La Paz y El Alto. También ofrece orientación a
+            familias.
+          </p>
+          <a href="https://goo.gl/maps/n6iLg1oNAr12" target="_blank" class="btn"
+            ><i class="fa-solid fa-location-dot"></i> Ver ubicación</a
+          >
+          <a href="https://operacionsonrisa.org.bo" target="_blank" class="btn"
+            ><i class="fa-solid fa-globe"></i> Sitio Oficial</a
+          >
+        </div>
+
+        <div class="card">
+          <img src="img/hospital-del-nino.jpg" alt="Hospital del Niño La Paz" />
+          <h3>Hospital del Niño La Paz</h3>
+          <p>
+            Cuenta con especialistas en cirugía plástica y maxilofacial.
+            Atienden a niños con fisura labio-palatina mediante campañas y
+            consultas regulares.
+          </p>
+          <a
+            href="https://goo.gl/maps/6UUVoeSpfG5dfv1V9"
+            target="_blank"
+            class="btn"
+            ><i class="fa-solid fa-location-dot"></i> Ver ubicación</a
+          >
+        </div>
+
+        <div class="card">
+          <img src="img/munay.jpg" alt="Hospital Munay El Alto" />
+          <h3>Hospital Munay — El Alto</h3>
+          <p>
+            Centro especializado en cirugías reconstructivas faciales. Participa
+            en campañas junto a Operación Sonrisa y brinda seguimiento gratuito.
+          </p>
+          <a
+            href="https://goo.gl/maps/EFFoD6QAkGzCzRna9"
+            target="_blank"
+            class="btn"
+            ><i class="fa-solid fa-location-dot"></i> Ver ubicación</a
+          >
+        </div>
+
+        <div class="card">
+          <img src="img/ayninakuna.jpg" alt="Fundación Ayninakuna" />
+          <h3>Fundación Ayninakuna</h3>
+          <p>
+            Ofrece atención integral, apoyo psicológico y terapia del lenguaje
+            para niños con fisura labio-palatina. Sede central en La Paz.
+          </p>
+          <a href="https://goo.gl/maps/y7MyeSbF7T32" target="_blank" class="btn"
+            ><i class="fa-solid fa-location-dot"></i> Ver ubicación</a
+          >
+        </div>
+
+        <div class="card">
+          <img src="img/hospital-los-andes.jpg" alt="Hospital Los Andes" />
+          <h3>Hospital Los Andes — El Alto</h3>
+          <p>
+            Atención quirúrgica y odontológica. Apoya campañas médicas de
+            reconstrucción facial en coordinación con fundaciones.
+          </p>
+          <a
+            href="https://goo.gl/maps/wfF8fSCKNWhZbSGV8"
+            target="_blank"
+            class="btn"
+            ><i class="fa-solid fa-location-dot"></i> Ver ubicación</a
+          >
+        </div>
+      </div>
+    </div>
+    <footer>
+      <div class="perfil">
+        <h3>Aldana Reina Rojas Rojas</h3>
+        <div class="social">
+          <a href="#" title="Correo"><i class="fa-solid fa-envelope"></i></a>
+          <a href="#" title="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+          <a href="#" title="Facebook"
+            ><i class="fa-brands fa-facebook-f"></i
+          ></a>
+          <a href="#" title="Instagram"
+            ><i class="fa-brands fa-instagram"></i
+          ></a>
+        </div>
+      </div>
+      <div class="perfil">
+        <h3>Mariana Antonela Flores Apaza</h3>
+        <div class="social">
+          <a href="#" title="Correo"><i class="fa-solid fa-envelope"></i></a>
+          <a href="#" title="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+          <a href="#" title="Facebook"
+            ><i class="fa-brands fa-facebook-f"></i
+          ></a>
+          <a href="#" title="Instagram"
+            ><i class="fa-brands fa-instagram"></i
+          ></a>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

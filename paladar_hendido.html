@@ -1,0 +1,1357 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Información de Labio Leporino</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f0f5f9;
+      display: flex;
+    }
+
+    .hamburguesa {
+      display: block;
+      position: fixed;
+      top: 15px;
+      left: 15px;
+      font-size: 30px;
+      background: none;
+      border: none;
+      color: #a9c1da;
+      z-index: 1001;
+      cursor: pointer;
+    }
+
+    .menu {
+      width: 240px;
+      height: 100vh;
+      background-color: #003366;
+      color: white;
+      position: fixed;
+      padding: 25px;
+      box-sizing: border-box;
+      transition: transform 0.3s ease-in-out;
+      transform: translateX(-100%);
+      z-index: 1000;
+    }
+
+    .menu h2 {
+      font-size: 20px;
+      margin-bottom: 25px;
+    }
+
+    .menu a {
+      color: rgb(163, 207, 233);
+      text-decoration: none;
+      display: block;
+      margin: 15px 0;
+      font-weight: 600;
+      padding: 10px;
+      border-radius: 8px;
+      transition: background-color 0.3s;
+    }
+
+    .menu a:hover,
+    .menu a.active {
+      background-color: #005599;
+    }
+
+    .menu.activo {
+      transform: translateX(0);
+    }
+
+    .contenido {
+      flex: 1;
+      margin-left: 0;
+      transition: margin-left 0.3s ease-in-out;
+      width: 100%;
+    }
+
+    .menu.activo~.contenido {
+      margin-left: 240px;
+    }
+
+    .titulo {
+      background-color: #003366;
+      color: white;
+      padding: 30px 20px;
+      text-align: center;
+    }
+
+    .titulo h1 {
+      margin: 0;
+      font-size: 26px;
+      text-transform: uppercase;
+    }
+
+    .contenedor-tarjetas {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+      padding: 40px 20px;
+    }
+
+    .tarjeta {
+      position: relative;
+      width: 280px;
+      height: 180px;
+      border-radius: 10px;
+      overflow: hidden;
+      cursor: pointer;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      background-size: cover;
+      background-position: center;
+      transition: transform 0.3s ease;
+    }
+
+    .tarjeta:hover {
+      transform: scale(1.05);
+    }
+
+    .tarjeta-texto {
+      position: absolute;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.6);
+      width: 100%;
+      padding: 15px;
+      color: white;
+      text-align: center;
+      font-weight: bold;
+      font-size: 18px;
+    }
+
+    .detalle {
+      display: none;
+      padding: 40px;
+    }
+
+    .detalle.activo {
+      display: block;
+    }
+
+    .boton-atras {
+      background-color: #003366;
+      color: white;
+      border: none;
+      padding: 12px 25px;
+      font-size: 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .botones-finales {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin: 40px 0;
+      flex-wrap: wrap;
+    }
+
+    .botones-finales button,
+    .boton-atras {
+      background-color: #003366;
+      color: white;
+      border: none;
+      padding: 12px 25px;
+      font-size: 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .botones-finales button:hover,
+    .boton-atras:hover {
+      background-color: #005599;
+    }
+
+    .flecha-atras {
+      font-size: 20px;
+      margin-right: 8px;
+    }
+
+    /* Tarjetas individuales */
+    .labio-leporino,
+    .tarjeta-causa,
+    .tarjeta-prevencion,
+    .tarjeta-tratamiento,
+    .tarjeta-consejos {
+      color: #fff;
+      padding: 70px 20px;
+      text-align: center;
+      border-radius: 15px;
+      margin: 40px auto;
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+      max-width: 950px;
+      background: linear-gradient(rgba(0, 51, 102, 0.85), rgba(0, 0, 51, 0.9)),
+        url("imagenes/proyecto5.jpg") no-repeat center/cover;
+    }
+
+    .labio-leporino h2,
+    .tarjeta-causa h2,
+    .tarjeta-prevencion h2,
+    .tarjeta-tratamiento h2,
+    .tarjeta-consejos h2 {
+      font-size: 30px;
+      text-transform: uppercase;
+      margin-bottom: 25px;
+      color: #b5e0ff;
+    }
+
+    .labio-leporino p,
+    .tarjeta-causa p,
+    .tarjeta-prevencion p,
+    .tarjeta-tratamiento p,
+    .tarjeta-consejos p {
+      font-size: 18px;
+      line-height: 1.8;
+      max-width: 800px;
+      margin: 0 auto 20px auto;
+      text-align: justify;
+    }
+
+    /* Galería */
+    .galeria {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+      margin-top: 25px;
+    }
+
+    .galeria img,
+    .galeria video {
+      width: 180px;
+      height: 120px;
+      border-radius: 8px;
+      object-fit: cover;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .galeria img:hover,
+    .galeria video:hover {
+      transform: scale(1.1);
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      justify-content: center;
+      align-items: center;
+      z-index: 2000;
+    }
+
+    .modal img,
+    .modal video {
+      max-width: 80%;
+      max-height: 80%;
+      border-radius: 10px;
+    }
+
+    .modal p {
+      color: white;
+      margin-top: 10px;
+      text-align: center;
+    }
+
+    .modal.active {
+      display: flex;
+    }
+
+    /* 📑 SECCIONES */
+    .seccion {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 60px 10%;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+
+    .seccion:nth-child(even) {
+      flex-direction: row-reverse;
+      background-color: #f4fcff;
+    }
+
+    .seccion img {
+      width: 400px;
+      height: 270px;
+      border-radius: 20px;
+      object-fit: cover;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .texto {
+      max-width: 500px;
+    }
+
+    .texto h3 {
+      color: #75a5ff;
+    }
+
+
+    /* 🎨 ESTILOS GENERALES */
+    body {
+      margin: 0;
+      font-family: "Poppins", sans-serif;
+      background-color: #fef6f0;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    header {
+      background-color: #ffe5ec;
+      padding: 15px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    header .logo {
+      display: flex;
+      align-items: center;
+    }
+
+    header .logo img {
+      width: 60px;
+      height: 60px;
+      margin-right: 10px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    nav a {
+      margin: 0 10px;
+      text-decoration: none;
+      color: #333;
+      font-weight: 600;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: #9ac9ff;
+    }
+
+    h2 {
+      text-align: center;
+      color: #75bcff;
+    }
+
+    /* 🩷 TARJETAS INTERIORES */
+    .subtarjetas {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      padding: 40px 10%;
+    }
+
+    .subtarjeta {
+      background-color: #ffe5ec;
+      border-radius: 20px;
+      padding: 20px;
+      width: 250px;
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      transition: transform 0.3s ease;
+    }
+
+    .subtarjeta:hover {
+      transform: translateY(-5px);
+    }
+
+    .subtarjeta img {
+      width: 100%;
+      border-radius: 15px;
+      margin-bottom: 10px;
+      height: 150px;
+      object-fit: cover;
+    }
+
+    /* 🎥 GALERÍA DE VIDEOS */
+    .videos {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      padding-bottom: 50px;
+    }
+
+    iframe {
+      border-radius: 15px;
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    /* 💬 CHATBOT FLOTANTE */
+    .chatbot-btn {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: #9ac6ff;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      font-size: 26px;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      transition: background 0.3s ease;
+    }
+
+    .chatbot-btn:hover {
+      background-color: #757eff;
+    }
+
+    .chatbox {
+      position: fixed;
+      bottom: 90px;
+      right: 20px;
+      width: 320px;
+      height: 420px;
+      background: white;
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+      display: none;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .chat-header {
+      background: #9ac6ff;
+      color: white;
+      padding: 10px;
+      text-align: center;
+      font-weight: bold;
+    }
+
+    .chat-messages {
+      flex: 1;
+      padding: 10px;
+      overflow-y: auto;
+      font-size: 14px;
+    }
+
+    .chat-input {
+      display: flex;
+      border-top: 1px solid #ddd;
+    }
+
+    .chat-input input {
+      flex: 1;
+      padding: 10px;
+      border: none;
+      outline: none;
+    }
+
+    .chat-input button {
+      background: #9adfff;
+      border: none;
+      color: white;
+      padding: 10px 15px;
+      cursor: pointer;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background-color: #ffe5ec;
+      color: #555;
+      font-weight: 500;
+      margin-top: 40px;
+    }
+
+        * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        font-family: Inter, Arial, sans-serif;
+        background: #f7fbff;
+        color: #123;
+      }
+      header {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 16px;
+        padding: 14px 26px;
+        background: #fff;
+      }
+      header img {
+        width: 56px;
+        height: 56px;
+        border-radius: 50%;
+        object-fit: cover;
+      }
+      header h1 {
+        
+        margin: 0;
+        color: #123;
+        font-size: 20px;
+      }
+      .wrap {
+        display: flex;
+        max-width: 1200px;
+        margin: 24px auto;
+        gap: 24px;
+        padding: 20px;
+      }
+      .left {
+        flex: 1;
+      }
+      .right {
+        flex: 1.1;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        justify-content: center;
+      }
+      .hero-img {
+        width: 100%;
+        height: 420px;
+        object-fit: cover;
+        border-radius: 14px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      }
+      .kpi {
+        display: flex;
+        gap: 12px;
+      }
+      .kpi .item {
+        background: #fff;
+        padding: 12px;
+        border-radius: 10px;
+        flex: 1;
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.05);
+      }
+      .kpi h4 {
+        margin: 0;
+        color: #005599;
+      }
+      .cards {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 16px;
+        margin-top: 16px;
+      }
+      .card {
+        background: #fff;
+        padding: 14px;
+        border-radius: 12px;
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.04);
+      }
+      .card h3 {
+        margin: 0;
+        color: #005599;
+      }
+      .media-row {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+        margin-top: 12px;
+      }
+      img.small,
+      video {
+        width: 48%;
+        height: 850px;
+        object-fit: cover;
+        border-radius: 10px;
+      }
+      footer {
+        padding: 16px;
+        text-align: center;
+        margin-top: 18px;
+        background: #e8f3ff;
+      }
+  </style>
+</head>
+
+<body>
+  <button class="hamburguesa" onclick="toggleMenu()">☰</button>
+  <div class="menu" id="menu">
+    <h2>Menú</h2>
+    <a href="inicio.html" class="active">Inicio</a>
+    <a href="labio_leporino.html">Información de L.L.</a>
+    <a href="paladar_hendido.html">Información de P.H.</a>
+    <a href="hospital.html">Hospitales</a>
+  </div>
+
+  <div class="contenido">
+    <div class="titulo">
+      <h1>PALADAR HENDIDO</h1>
+    </div>
+
+    <div class="contenedor-tarjetas" id="tarjetas">
+      <div class="tarjeta" style="background-image: url('imagenes/proyecto4.jpeg')" onclick="mostrarDetalle('detalle1')">
+        <div class="tarjeta-texto">¿Qué es?</div>
+      </div>
+      <div class="tarjeta" style="background-image: url('imagenes/proyecto4.jpg')" onclick="mostrarDetalle('detalle2')">
+        <div class="tarjeta-texto">¿Por qué se da?</div>
+      </div>
+      <div class="tarjeta" style="background-image: url('imagenes/proyecto13.jpg')" onclick="mostrarDetalle('detalle3')">
+        <div class="tarjeta-texto">¿Se puede prevenir?</div>
+      </div>
+      <div class="tarjeta" style="background-image: url('imagenes/proyecto14.jpg')" onclick="mostrarDetalle('detalle4')">
+        <div class="tarjeta-texto">Tratamiento</div>
+      </div>
+      <div class="tarjeta" style="background-image: url('imagenes/proyecto15.jpg')"
+        onclick="mostrarDetalle('detalle5')">
+        <div class="tarjeta-texto">Consejos</div>
+      </div>
+      <div class="tarjeta" style="background-image: url('imagenes/proyecto16.jpg')"
+        onclick="mostrarDetalle('detalle6')">
+        <div class="tarjeta-texto">Historias reales</div>
+      </div>
+    </div>
+
+    <!-- Sección 1: ¿Qué es? -->
+    <div id="detalle1" class="detalle">
+      <button class="boton-atras" onclick="volver()">
+        <span class="flecha-atras">←</span>Volver
+      </button>
+
+      <!-- 🌸 SECCIONES PRINCIPALES -->
+      <section class="seccion">
+        <img src="imagenes/proyecto5.jpg" alt="Labio Leporino" />
+        <div class="texto">
+          <h3>¿Qué es el paladar hendido?</h3>
+          <p>
+            El paladar hendido es una abertura en el techo de la boca que ocurre cuando los tejidos que forman el paladar no se cierran completamente durante el desarrollo del bebé en el útero. Esta malformación puede afectar la alimentación, el habla y la salud dental si no se trata adecuadamente.
+          </p>
+        </div>
+      </section>
+
+      <section class="seccion">
+        <img src="imagenes/proyecto7.jpg" alt="Causas" />
+        <div class="texto">
+          <h3>Impacto del paladar hendido</h3>
+          <p>
+            Además de la apertura en el paladar, esta condición puede generar dificultades para succionar, tragar y pronunciar algunas palabras. También puede ocasionar problemas dentales y riesgo de infecciones en el oído medio. La detección temprana permite planificar tratamientos y cirugías que mejoran la función y apariencia.
+          </p>
+        </div>
+      </section>
+      <!-- 🌼 SUBTARJETAS (CONSEJOS) -->
+      <div class="subtarjetas">
+        <div class="subtarjeta">
+          <img src="imagenes/proyecto.jpg" alt="Cuidado médico" />
+          <h4>Tipos de paladar hendido</h4>
+          <p>
+            Puede ser unilateral (solo un lado) o bilateral (ambos lados).
+          </p>
+        </div>
+
+        <div class="subtarjeta">
+          <img src="imagenes/ecografiasmostrandoellabioleporino.jpg" alt="Apoyo emocional" />
+          <h4>Relación con labio leporino</h4>
+          <p>
+           A veces se presenta junto con labio leporino, aunque también puede aparecer solo.
+          </p>
+        </div>
+
+        <div class="subtarjeta">
+          <img src="imagenes/proyecto1.jpg" alt="Alimentación" />
+          <h4>Importancia de la detección temprana</h4>
+          <p>
+            Detectarlo a tiempo permite planificar cirugía y terapias de manera efectiva.
+          </p>
+        </div>
+      </div>
+
+      <!-- 🎥 VIDEOS -->
+      <h2>Videos informativos</h2>
+      <div class="videos">
+
+
+        <video controls>
+          <source src="videos/Download (9).mp4" type="video/mp4" />
+        </video>
+        
+        
+
+      </div>
+
+        </div>
+    <!-- Sección 2: ¿Por qué se da? -->
+    <div id="detalle2" class="detalle">
+      <button class="boton-atras" onclick="volver()">
+        <span class="flecha-atras">←</span>Volver
+      </button>
+
+    <main class="wrap">
+      <div class="left">
+        <img class="hero-img" src="imagenes/proyecto7.jpg" alt="Imagen hero" />
+      </div>
+
+      <div class="right">
+        <h2 style="color: #75a1ff; margin: 0">
+          ¿Por qué se da el Paladar Hendido?
+        </h2>
+        <p>
+      El paladar hendido ocurre cuando las partes que forman el techo de la boca no se cierran correctamente durante el desarrollo del bebé en el útero. Su origen es multifactorial, resultado de la combinación de factores genéticos y ambientales.
+        </p>
+
+        <div class="kpi">
+          <div class="item">
+            <h4>Factores genéticos</h4>
+            <p>Algunos bebés tienen predisposición a desarrollar paladar hendido debido a genes heredados o antecedentes familiares de malformaciones faciales.</p>
+          </div>
+          <div class="item">
+            <h4>Factores ambientales</h4>
+            <p>Sustancias como alcohol, tabaco, ciertos medicamentos o exposición a químicos durante el embarazo pueden afectar la correcta formación del paladar.</p>
+          </div>
+        </div>
+        
+
+        <div class="cards">
+          <div class="card">
+            <h3>Deficiencia de ácido fólico</h3>
+            <p>La falta de ácido fólico en el embarazo aumenta el riesgo de paladar hendido, ya que esta vitamina es esencial para el desarrollo adecuado de los tejidos faciales.</p>
+          </div>
+          <div class="card">
+            <h3>Enfermedades maternas</h3>
+            <p>Condiciones como diabetes, infecciones u otras enfermedades de la madre pueden interferir en la formación normal del paladar del bebé.</p>
+          </div>
+        </div>
+
+        
+      </div>
+    </main>
+
+      <section class="seccion">
+        <img src="imagenes/ecografiasmostrandoellabioleporino.jpg" alt="Apoyo emocional" />
+        <div class="texto">
+          <h3>Diagnóstico prenatal</h3>
+          <p>
+           Se puede detectar el paladar hendido antes del nacimiento mediante ecografías y estudios médicos, lo que permite planificar tratamiento y seguimiento desde los primeros meses de vida.
+          </p>
+        </div>
+      </section>
+
+      <section class="seccion">
+        <img src="imagenes/proyecto2.jpg" alt="Alimentación" />
+        <div class="texto">
+          <h3>Importancia del tratamiento temprano</h3>
+          <p>
+           El paladar hendido se puede corregir con cirugía y terapias complementarias, como logopedia y odontología, mejorando la alimentación, el habla y la apariencia del niño.
+          </p>
+        </div>
+      </section>
+
+       <h2>Videos informativos</h2>
+      <div class="videos">
+
+        <video controls>
+          <source src="videos/Download (10).mp4" type="video/mp4" />
+        </video>
+    </div>
+    </div>
+  
+
+    <!-- Sección 3: ¿Se puede prevenir? -->
+    <div id="detalle3" class="detalle">
+      <button class="boton-atras" onclick="volver()">
+        <span class="flecha-atras">←</span>Volver
+      </button>
+       
+<section class="seccion">
+        <img src="imagenes/proyecto5.jpg" alt="Labio Leporino" />
+        <div class="texto">
+          <h3>El Paladar Hendido no siempre se puede prevenir</h3>
+          <p>
+           Aunque muchas veces se desconocen las causas exactas, existen medidas que pueden disminuir el riesgo. No todos los casos se deben a descuidos o herencia directa, ya que la formación del paladar depende de múltiples factores genéticos y ambientales que a veces no se pueden controlar.
+          </p>
+        </div>
+      </section>
+
+       <section class="seccion">
+        <img src="imagenes/proyecto7.jpg" alt="Causas" />
+        <div class="texto">
+          <h3>La prevención comienza antes del embarazo</h3>
+          <p>
+           La etapa previa a la gestación es clave. Tomar ácido fólico, llevar una alimentación equilibrada y realizar chequeos médicos antes de quedar embarazada fortalece el organismo y reduce la posibilidad de malformaciones. La salud de ambos padres también influye.
+          </p>
+        </div>
+      </section>
+
+    <!-- 🌼 SUBTARJETAS (CONSEJOS) -->
+     <center><h2>Consejos para las madres durante el embarazo🌸</h2></center>
+      <div class="subtarjetas">
+        <div class="subtarjeta">
+          <img src="imagenes/proyecto.jpg" alt="Cuidado médico" />
+          <h4>Suplementos prenatales</h4>
+          <p>
+           Tomar vitaminas y minerales adecuados durante el embarazo ayuda a reducir el riesgo de malformaciones, incluyendo el paladar hendido.
+          </p>
+        </div>
+
+        <div class="subtarjeta">
+          <img src="imagenes/ecografiasmostrandoellabioleporino.jpg" alt="Apoyo emocional" />
+          <h4>Hábitos saludables durante el embarazo</h4>
+          <p>
+           Mantener buena alimentación, hacer ejercicio moderado y evitar sustancias dañinas como alcohol y tabaco protege el desarrollo del paladar del bebé.
+          </p>
+        </div>
+
+        <div class="subtarjeta">
+          <img src="imagenes/proyecto1.jpg" alt="Alimentación" />
+          <h4>Mantener un peso saludable</h4>
+          <p>
+           El sobrepeso o la obesidad durante el embarazo puede aumentar ciertos riesgos de malformaciones, incluyendo el paladar hendido.
+          </p>
+        </div>
+      </div>
+
+      <!-- 🌼 SUBTARJETAS (CONSEJOS) -->
+      <div class="subtarjetas">
+        <div class="subtarjeta">
+          <img src="imagenes/proyecto.jpg" alt="Cuidado médico" />
+          <h4>Control de enfermedades crónicas</h4>
+          <p>
+          Mantener bajo control enfermedades como diabetes, hipertensión o infecciones disminuye la probabilidad de malformaciones.
+          </p>
+        </div>
+
+        <div class="subtarjeta">
+          <img src="imagenes/ecografiasmostrandoellabioleporino.jpg" alt="Apoyo emocional" />
+          <h4>Visitas médicas regulares</h4>
+          <p>
+           Las consultas periódicas permiten detectar y corregir problemas que puedan afectar el desarrollo del paladar del feto.
+          </p>
+        </div>
+
+        <div class="subtarjeta">
+          <img src="imagenes/proyecto1.jpg" alt="Alimentación" />
+          <h4>Alimentación saludable</h4>
+          <p>
+            Consumir una dieta balanceada rica en frutas, verduras y proteínas ayuda al correcto desarrollo de los tejidos del paladar del bebé.
+          </p>
+        </div>
+      </div>
+
+      <section class="seccion">
+        <img src="imagenes/proyecto5.jpg" alt="Labio Leporino" />
+        <div class="texto">
+          <h3>Cuidar el cuerpo durante el embarazo es fundamental</h3>
+          <p>
+Durante el embarazo, la madre debe evitar el consumo de alcohol,
+          tabaco y medicamentos sin receta. Además, es importante mantener un
+          control médico constante para detectar a tiempo cualquier complicación
+          o carencia nutricional.
+          </p>
+        </div>
+      </section>
+
+       <section class="seccion">
+        <img src="imagenes/proyecto7.jpg" alt="Causas" />
+        <div class="texto">
+          <h3>Otros cuidados esenciales</h3>
+          <p>
+           Mantener una alimentación saludable, asistir a los controles
+          prenatales, evitar el alcohol, el tabaco y los medicamentos sin receta
+          son pasos fundamentales para proteger al bebé.
+          </p>
+        </div>
+      </section>
+
+       <section class="seccion">
+        <img src="imagenes/proyecto7.jpg" alt="Causas" />
+        <div class="texto">
+          <h3>La educación y la información salvan vidas</h3>
+          <p>
+            Conocer los riesgos y recibir orientación médica sobre cómo cuidar el
+          embarazo ayuda a prevenir muchos problemas de salud del bebé. Las
+          campañas de información sobre el ácido fólico y los controles
+          prenatales son esenciales para reducir los casos de paladar hendido.
+          </p>
+        </div>
+      </section>
+      <!-- 🌼 SUBTARJETAS (CONSEJOS) -->
+      <div class="subtarjetas">
+        <div class="subtarjeta">
+          <img src="imagenes/proyecto.jpg" alt="Cuidado médico" />
+          <h4>Ácido fólico</h4>
+          <p>
+            Consumir suplementos de ácido fólico ayuda a prevenir defectos en el
+          desarrollo del bebé.
+          </p>
+        </div>
+
+        <div class="subtarjeta">
+          <img src="imagenes/ecografiasmostrandoellabioleporino.jpg" alt="Apoyo emocional" />
+          <h4>Alimentación sana</h4>
+          <p>
+           Comer frutas, verduras y alimentos ricos en vitaminas mejora la salud
+          materna y fetal.
+          </p>
+        </div>
+
+        <div class="subtarjeta">
+          <img src="imagenes/proyecto1.jpg" alt="Alimentación" />
+          <h4>Controles médicos</h4>
+          <p>
+           Visitar al médico regularmente garantiza un seguimiento seguro del
+          embarazo.
+          </p>
+        </div>
+      </div>
+
+      <!-- 🎥 VIDEOS -->
+      <h2>Videos informativos</h2>
+      <div class="videos">
+
+
+        <video controls>
+          <source src="videos/Download (4).mp4" type="video/mp4" />
+        </video>
+      </div>
+
+
+    </div>
+
+    <!-- Sección 4: Tratamiento -->
+    <div id="detalle4" class="detalle">
+      <button class="boton-atras" onclick="volver()">
+        <span class="flecha-atras">←</span>Volver
+      </button>
+      
+<section class="seccion">
+        <img src="imagenes/proyecto5.jpg" alt="Labio Leporino" />
+        <div class="texto">
+          <h3>Cirugía del Paladar Hendido</h3>
+          <p>
+         La cirugía se realiza generalmente cuando el bebé tiene entre 9 y 18 meses de edad, dependiendo de la gravedad y del crecimiento del niño.
+          </p>
+           <p>
+          Su objetivo es cerrar la abertura en el paladar para mejorar la alimentación, el habla y la respiración, además de prevenir problemas dentales y auditivos.
+          </p>
+           <p>
+          🩺 Es un procedimiento seguro que también ayuda a mejorar la apariencia y función de la boca y el rostro.
+          </p>
+        </div>
+      </section>
+    
+      <section class="seccion">
+        <img src="imagenes/proyecto5.jpg" alt="Labio Leporino" />
+        <div class="texto">
+          <h3>Cuidados Después de la Cirugía</h3>
+          <p>
+         Después de la operación, el bebé requiere cuidados especiales:
+         <ul>
+<il>– Mantén la herida limpia y seca.</il>
+<il>
+– Usa las pomadas o medicamentos que indique el médico.</il>
+<il>
+– Evita que el niño se rasque o toque los puntos quirúrgicos.</il>
+</ul>
+           <p>
+         🩹 La recuperación suele tardar entre 1 y 2 semanas, y es importante acudir a los controles médicos programados.
+          </p>
+        </div>
+      </section>
+
+      <section class="seccion">
+        <img src="imagenes/proyecto5.jpg" alt="Labio Leporino" />
+        <div class="texto">
+          <h3>Terapia del Habla</h3>
+          <p>
+          Algunos niños con paladar hendido pueden tener dificultad para pronunciar ciertas palabras o sonidos.
+          </p>
+           <p>
+          El fonoaudiólogo enseña ejercicios para mejorar la pronunciación, la respiración y el control de aire al hablar.
+          </p>
+           <p>
+          🎤 La práctica constante ayuda a que el niño gane confianza al hablar.
+          </p>
+        </div>
+      </section>
+
+
+      <section class="seccion">
+        <img src="imagenes/proyecto5.jpg" alt="Labio Leporino" />
+        <div class="texto">
+          <h3>Atención Odontológica</h3>
+           <p>
+          El paladar hendido puede afectar el crecimiento de los dientes y el hueso del maxilar.
+          </p>
+           <p>
+          Por eso, el odontólogo controla la erupción dental y, si es necesario, coloca aparatos correctivos.
+          </p>
+           <p>
+          🦷 Es importante comenzar las revisiones desde que salen los primeros dientes para prevenir complicaciones.
+          </p>
+        </div>
+      </section>
+
+      <section class="seccion">
+        <img src="imagenes/proyecto5.jpg" alt="Labio Leporino" />
+        <div class="texto">
+          <h3>Apoyo Psicológico y Familiar</h3>
+          <p>
+          El apoyo emocional de la familia es esencial para el desarrollo del niño.
+          </p>
+           <p>
+          El niño necesita sentirse aceptado y amado para desarrollar una buena autoestima.
+          </p>
+           <p>
+          💞 Los padres también pueden recibir orientación psicológica para afrontar las emociones que este proceso conlleva el tratamiento del paladar hendido.
+          </p>
+        </div>
+      </section>
+
+      <section class="seccion">
+        <img src="imagenes/proyecto5.jpg" alt="Labio Leporino" />
+        <div class="texto">
+          <h3>Seguimiento Médico Continuo</h3>
+          <p>
+          El tratamiento del labio leporino requiere un equipo de especialistas: cirujano plástico, pediatra, odontólogo, fonoaudiólogo y psicólogo.
+          </p>
+           <p>
+          🔍 Los controles médicos periódicos aseguran que el niño crezca saludable, con una buena alimentación, habla clara y desarrollo normal del paladar.
+          </p>
+        </div>
+      </section>
+
+      
+    <!-- 🌼 SUBTARJETAS (CONSEJOS) -->
+     <center><h2>TIPS EXTRAS</h2></center>
+      <div class="subtarjetas">
+        <div class="subtarjeta">
+          <img src="imagenes/proyecto.jpg" alt="Cuidado médico" />
+          <h4>Alimentación del Bebé</h4>
+          <p>
+            Los bebés con paladar hendido pueden tener dificultad para succionar y tragar.
+
+Se recomienda usar biberones o tetinas especiales y mantener al bebé en posición semi sentada durante la alimentación para evitar que la leche pase a la nariz o cause infecciones.
+          </p>
+        </div>
+
+        <div class="subtarjeta">
+          <img src="imagenes/ecografiasmostrandoellabioleporino.jpg" alt="Apoyo emocional" />
+          <h4>Comunicación y Lenguaje</h4>
+          <p>
+           Habla con tu bebé desde pequeño, cántale y muéstrale afecto.
+ Esto estimula el desarrollo del lenguaje y crea un vínculo emocional positivo.
+La terapia del habla puede comenzar desde temprana edad si el médico lo recomienda.
+          </p>
+        </div>
+
+        <div class="subtarjeta">
+          <img src="imagenes/proyecto1.jpg" alt="Alimentación" />
+          <h4>Cuidados en Casa</h4>
+          <p>
+          Mantén siempre limpia la zona de la boca y evita los juguetes duros o puntiagudos. Limpia con gasas húmedas y sigue al pie de la letra las indicaciones médicas después de la cirugía.
+          </p>
+        </div>
+      </div>
+
+       <!-- 🎥 VIDEOS -->
+      <h2>Videos informativos</h2>
+      <div class="videos">
+
+
+        <video controls>
+          <source src="videos/Download (5).mp4" type="video/mp4" />
+        </video>
+      </div>
+
+      
+    </div>
+
+    <!-- Sección 5: Consejos -->
+    <div id="detalle5" class="detalle">
+      <button class="boton-atras" onclick="volver()">
+        <span class="flecha-atras">←</span>Volver
+      </button>
+      
+       <!-- 🌼 SUBTARJETAS (CONSEJOS) -->
+      <div class="subtarjetas">
+        <div class="subtarjeta">
+          <img src="imagenes/proyecto.jpg" alt="Cuidado médico" />
+          <h4>Aceptar con amor</h4>
+          <p>
+            La aceptación es el primer paso. Comprender que el labio leporino no define a la persona, sino que es solo una condición tratable, ayuda a crear un ambiente lleno de cariño y confianza.
+          </p>
+        </div>
+
+        <div class="subtarjeta">
+          <img src="imagenes/ecografiasmostrandoellabioleporino.jpg" alt="Apoyo emocional" />
+          <h4>Buscar apoyo médico temprano</h4>
+          <p>
+           Acudir a especialistas desde los primeros meses permite planificar las cirugías y terapias necesarias para mejorar el habla, la alimentación y la estética del niño.
+          </p>
+        </div>
+
+        <div class="subtarjeta">
+          <img src="imagenes/proyecto1.jpg" alt="Alimentación" />
+          <h4>Hablar del tema con naturalidad</h4>
+          <p>
+          Hablar abierta y positivamente sobre el labio leporino ayuda a eliminar prejuicios, fomenta la comprensión y refuerza la autoestima del niño.
+          </p>
+        </div>
+      </div>
+
+
+       <!-- 🌼 SUBTARJETAS (CONSEJOS) -->
+      <div class="subtarjetas">
+        <div class="subtarjeta">
+          <img src="imagenes/proyecto.jpg" alt="Cuidado médico" />
+          <h4>Estimular el desarrollo del lenguaje</h4>
+          <p>
+            Las terapias del habla son esenciales para que el niño aprenda a comunicarse claramente y gane confianza al expresarse.
+          </p>
+        </div>
+
+        <div class="subtarjeta">
+          <img src="imagenes/ecografiasmostrandoellabioleporino.jpg" alt="Apoyo emocional" />
+          <h4>Fomentar la autoestima</h4>
+          <p>
+           Motivar al niño a sentirse valioso, único y capaz fortalece su seguridad emocional y lo ayuda a afrontar las etapas de crecimiento con alegría.
+          </p>
+        </div>
+
+        <div class="subtarjeta">
+          <img src="imagenes/proyecto1.jpg" alt="Alimentación" />
+          <h4>Unirse a grupos de apoyo</h4>
+          <p>
+          Participar en comunidades o fundaciones sobre labio leporino permite compartir experiencias, recibir consejos y sentirse acompañado en el proceso.
+          </p>
+        </div>
+      </div>
+
+       <!-- 🌼 SUBTARJETAS (CONSEJOS) -->
+      <div class="subtarjetas">
+        <div class="subtarjeta">
+          <img src="imagenes/proyecto.jpg" alt="Cuidado médico" />
+          <h4>Cuidar la alimentación</h4>
+          <p>
+            Seguir las recomendaciones médicas sobre cómo alimentar al bebé facilita su nutrición y crecimiento saludable, especialmente antes y después de las cirugías.
+          </p>
+        </div>
+
+        <div class="subtarjeta">
+          <img src="imagenes/ecografiasmostrandoellabioleporino.jpg" alt="Apoyo emocional" />
+          <h4>Acompañar con paciencia</h4>
+          <p>
+          El proceso puede ser largo, pero con paciencia, apoyo emocional y amor constante, cada avance se convierte en una gran victoria.
+          </p>
+        </div>
+
+        <div class="subtarjeta">
+          <img src="imagenes/proyecto1.jpg" alt="Alimentación" />
+          <h4>Mantener la esperanza</h4>
+          <p>
+         Con los tratamientos actuales, la mayoría de los niños con labio leporino pueden llevar una vida completamente normal y feliz. La esperanza es la fuerza que impulsa cada paso.
+          </p>
+        </div>
+      </div>
+    
+<!-- 🎥 VIDEOS -->
+      <h2>Videos informativos</h2>
+      <div class="videos">
+
+
+        <video controls>
+          <source src="videos/Download (7).mp4" type="video/mp4" />
+        </video>
+        
+        <video controls>
+          <source src="videos/Download (8).mp4" type="video/mp4" />
+        </video>
+
+      </div>
+
+
+    </div>
+
+    <!-- Sección 6: Historias reales (sin galería aún) -->
+    <div id="detalle6" class="detalle">
+      <button class="boton-atras" onclick="volver()">
+        <span class="flecha-atras">←</span>Volver
+      </button>
+      <div class="labio-leporino">
+        <h2>Historias reales</h2>
+        <p>
+          Pronto encontrarás aquí testimonios de personas y familias que
+          superaron el paladar hendido. Ellos son inspiración de fortaleza,
+          esperanza y amor incondicional.
+        </p>
+      </div>
+    </div>
+    <div class="botones-finales">
+      <button onclick="alert('Próximamente más secciones')">
+        Explorar más
+      </button>
+
+      <button onclick="alert('¡Actividad para niños en construcción!')">
+        Actividades
+        
+      </button>
+    </div>
+    <footer>💙 Uniendo Sonrisas | Creciendo con empatía y amor.</footer>
+    <!-- 💬 CHATBOT -->
+    <button class="chatbot-btn" id="chatbot-btn">💬</button>
+    <div class="chatbox" id="chatbox">
+      <div class="chat-header">Asistente Uniendo Sonrisas</div>
+      <div class="chat-messages" id="chat-messages">
+        <p>
+          <strong>🤖:</strong> ¡Hola! Puedo responder tus dudas sobre
+          <b>labio leporino</b> o <b>paladar hendido</b>. 💬
+        </p>
+      </div>
+      <div class="chat-input">
+        <input type="text" id="user-input" placeholder="Escribe tu pregunta..." />
+        <button id="send-btn">Enviar</button>
+      </div>
+    </div>
+
+    <!-- Modal de galería -->
+    <div id="modal" class="modal" onclick="cerrarModal()">
+      <img id="imagenAmpliada" src="" alt="" />
+      <video id="videoAmpliado" controls style="display: none"></video>
+      <p id="descripcion"></p>
+    </div>
+
+    <script>
+      function toggleMenu() {
+        document.getElementById("menu").classList.toggle("activo");
+      }
+      function mostrarDetalle(id) {
+        document.getElementById("tarjetas").style.display = "none";
+        document
+          .querySelectorAll(".detalle")
+          .forEach((d) => d.classList.remove("activo"));
+        document.getElementById(id).classList.add("activo");
+        console.log(document.getElementById(id));
+      }
+      function volver() {
+        document.getElementById("tarjetas").style.display = "flex";
+        document
+          .querySelectorAll(".detalle")
+          .forEach((d) => d.classList.remove("activo"));
+      }
+      document
+        .querySelectorAll(".galeria img, .galeria video")
+        .forEach((item) => {
+          item.addEventListener("click", (e) => {
+            const modal = document.getElementById("modal");
+            const img = document.getElementById("imagenAmpliada");
+            const vid = document.getElementById("videoAmpliado");
+            if (item.tagName === "IMG") {
+              img.src = item.src;
+              img.style.display = "block";
+              vid.style.display = "none";
+            } else {
+              vid.src = item.querySelector("source").src;
+              vid.style.display = "block";
+              img.style.display = "none";
+            }
+            modal.classList.add("active");
+          });
+        });
+      function cerrarModal() {
+        const modal = document.getElementById("modal");
+        modal.classList.remove("active");
+        document.getElementById("videoAmpliado").pause();
+      }
+
+
+      // Chatbot
+      const chatBtn = document.getElementById("chatbot-btn");
+      const chatBox = document.getElementById("chatbox");
+      const sendBtn = document.getElementById("send-btn");
+      const userInput = document.getElementById("user-input");
+      const chatMessages = document.getElementById("chat-messages");
+
+      // Mostrar u ocultar el chatbot
+      chatBtn.addEventListener("click", () => {
+        chatBox.style.display = chatBox.style.display === "flex" ? "none" : "flex";
+      });
+
+      // Enviar mensaje
+      sendBtn.addEventListener("click", enviarMensaje);
+      userInput.addEventListener("keypress", function (e) {
+        if (e.key === "Enter") enviarMensaje();
+      });
+
+      async function enviarMensaje() {
+        const mensaje = userInput.value.trim();
+        if (mensaje === "") return;
+
+        const API_KEY = "AIzaSyCxKcDemwiWM6p4sklRDlXLqakxhIatli4";
+
+        // Mostrar mensaje del usuario
+        const userMsg = document.createElement("p");
+        userMsg.innerHTML = `<strong>Tú:</strong> ${mensaje}`;
+        chatMessages.appendChild(userMsg);
+
+        // Mostrar mensaje temporal del bot
+        const botMsg = document.createElement("p");
+        botMsg.innerHTML = "<strong>🤖:</strong> Pensando...";
+        chatMessages.appendChild(botMsg);
+
+        try {
+          const response = await fetch(
+            "https://generativelanguage.googleapis.com/v1/models/gemini-2.5-flash:generateContent?key=" + API_KEY,
+            {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                contents: [
+                  {
+                    role: "user",
+                    parts: [
+                      {
+                        text: `
+Eres un asistente educativo amable y experto en temas sobre el labio leporino y el paladar hendido.
+Responde solo a preguntas relacionadas con esos temas.
+Da explicaciones simples, sin lenguaje técnico, como si hablaras con estudiantes.
+Usa un máximo de 50 palabras en tus respuestas.
+Pregunta: ${mensaje}
+                  `,
+                      },
+                    ],
+                  },
+                ],
+              }),
+            }
+          );
+
+          const data = await response.json();
+          console.log(data);
+
+          const reply =
+            data.candidates?.[0]?.content?.parts?.[0]?.text ||
+            "Lo siento, no pude obtener una respuesta.";
+
+          // Reemplazar el mensaje "Pensando..." con la respuesta real
+          botMsg.innerHTML = `<strong>🤖:</strong> ${reply}`;
+        } catch (error) {
+          console.error(error);
+          botMsg.innerHTML =
+            "<strong>🤖:</strong> Ocurrió un error al conectar con el servidor.";
+        }
+
+        // Desplazar hacia abajo
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+
+        // Limpiar campo de entrada
+        userInput.value = "";
+      }
+
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Campañas y Apoyo - L.L. y P.H.</title>
+    <style>
+      body {
+        margin: 0;
+        font-family: "Segoe UI", sans-serif;
+        background-color: #eef2f5;
+        display: flex;
+      }
+
+      .card {
+        background: #ffffff;
+        border-radius: 12px;
+        padding: 20px;
+        margin: 20px auto;
+        max-width: 800px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        line-height: 1.6;
+      }
+
+      .card-title {
+        text-align: center;
+        color: #0066cc;
+        margin-bottom: 15px;
+      }
+
+      .card h3 {
+        color: #009688;
+        margin-top: 20px;
+      }
+
+      .card ul,
+      .card ol {
+        margin-left: 20px;
+        padding-left: 15px;
+      }
+
+      .card b {
+        color: #444;
+      }
+
+      /* Botón hamburguesa */
+      .hamburguesa {
+        display: block;
+        position: fixed;
+        top: 15px;
+        left: 15px;
+        font-size: 30px;
+        background: none;
+        border: none;
+        color: #d5dadf;
+        z-index: 1001;
+        cursor: pointer;
+      }
+
+      /* Menú lateral */
+      .menu {
+        width: 240px;
+        height: 100vh;
+        background-color: #003366;
+        color: white;
+        position: fixed;
+        padding: 25px;
+        box-sizing: border-box;
+        transition: transform 0.3s ease-in-out;
+        transform: translateX(-100%);
+        z-index: 1000;
+      }
+
+      .menu.activo {
+        transform: translateX(0);
+      }
+
+      .menu h2 {
+        font-size: 20px;
+        margin-bottom: 25px;
+      }
+
+      .menu a {
+        color: rgb(163, 207, 233);
+        text-decoration: none;
+        display: block;
+        margin: 15px 0;
+        font-weight: 600;
+        padding: 10px;
+        border-radius: 8px;
+        transition: background-color 0.3s;
+      }
+
+      .menu a:hover,
+      .menu a.active {
+        background-color: #003366;
+      }
+
+      /* Contenido principal */
+      .contenido {
+        flex: 1;
+        margin-left: 0;
+        transition: margin-left 0.3s ease-in-out;
+      }
+
+      .menu.activo ~ .contenido {
+        margin-left: 240px;
+      }
+
+      /* Encabezado */
+      .titulo {
+        background-color: #001f3f;
+        color: white;
+        text-align: center;
+        padding: 50px 20px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+      }
+
+      /* ---- Tarjetas ---- */
+      .contenedor-tarjetas {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        justify-content: center;
+        padding: 40px 20px;
+      }
+
+      .tarjeta {
+        position: relative;
+        width: 280px;
+        height: 180px;
+        border-radius: 12px;
+        overflow: hidden;
+        cursor: pointer;
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25);
+        background-size: cover;
+        background-position: center;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .tarjeta:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 12px 20px rgba(0, 0, 0, 0.35);
+      }
+
+      .tarjeta-texto {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        padding: 15px;
+        color: #ffffff;
+        text-align: center;
+        font-weight: bold;
+        font-size: 18px;
+        background: linear-gradient(to top, rgba(0, 0, 0, 0.75), transparent);
+        letter-spacing: 1px;
+      }
+
+      /* Detalles */
+      .detalle {
+        display: none;
+        padding: 40px;
+      }
+
+      .detalle.activo {
+        display: block;
+      }
+
+      .boton-atras {
+        background-color: #003366;
+        color: white;
+        border: none;
+        padding: 12px 25px;
+        font-size: 16px;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        margin-bottom: 20px;
+      }
+
+      .boton-atras:hover {
+        background-color: #002244;
+      }
+
+      .flecha-atras {
+        font-size: 20px;
+        margin-right: 8px;
+      }
+
+      /* Videos */
+      .videos {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 25px;
+        margin-top: 40px;
+      }
+
+      /* Campañas */
+      .campaña {
+        background-color: #f7fbff;
+        border-left: 6px solid #003366;
+        border-radius: 10px;
+        padding: 25px 30px;
+        margin: 40px auto;
+        max-width: 900px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+      }
+
+      .campaña h2 {
+        color: #003366;
+        text-transform: uppercase;
+        text-align: center;
+        margin-bottom: 20px;
+      }
+
+      .campaña h3 {
+        color: #005599;
+        margin-top: 25px;
+      }
+
+      .campaña p,
+      .campaña li {
+        color: #333;
+        line-height: 1.7;
+        font-size: 17px;
+      }
+
+      .campaña ul {
+        margin-left: 25px;
+      }
+
+      .mensaje-final {
+        background-color: #eaf4ff;
+        border-left: 4px solid #0099cc;
+        padding: 15px;
+        margin-top: 25px;
+        font-style: italic;
+        text-align: center;
+        border-radius: 8px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Botón menú -->
+    <button class="hamburguesa" onclick="toggleMenu()">☰</button>
+
+    <!-- Menú lateral -->
+    <div class="menu" id="menu">
+      <h2>Menú</h2>
+      <a href="inicio.html">Inicio</a>
+      <a href="labio_leporino.html">Información de L.L</a>
+      <a href="paladar_hendido.html">Información de P.H</a>
+      <a href="campañas.html" class="active">Campañas y Apoyo</a>
+      <a href="hospitales.html">Hospitales</a>
+    </div>
+
+    <!-- Contenido -->
+    <div class="contenido">
+      <div class="titulo" id="inicio">
+        <h1>Campañas y Apoyo</h1>
+      </div>
+
+      <!-- Tarjetas de campañas -->
+      <div class="contenedor-tarjetas" id="tarjetas">
+        <div
+          class="tarjeta"
+          style="
+            background-image: url('imagenes/proyecto17.jpg');
+            border-bottom: 6px solid #007acc;
+          "
+          onclick="mostrarDetalle('detalle1')">
+          <div class="tarjeta-texto">Operación Sonrisa</div>
+        </div>
+
+        <div
+          class="tarjeta"
+          style="
+            background-image: url('imagenes/proyecto18.jpg');
+            border-bottom: 6px solid #2ecc71;
+          "
+          onclick="mostrarDetalle('detalle2')">
+          <div class="tarjeta-texto">Rotary Club</div>
+        </div>
+
+        <div
+          class="tarjeta"
+          style="
+            background-image: url('imagenes/proyecto19.jpg');
+            border-bottom: 6px solid #e74c3c;
+          "
+          onclick="mostrarDetalle('detalle3')">
+          <div class="tarjeta-texto">Achacachi</div>
+        </div>
+
+        <div
+          class="tarjeta"
+          style="
+            background-image: url('imagenes/proyecto20.jpg');
+            border-bottom: 6px solid #f1c40f;
+          "
+          onclick="mostrarDetalle('detalle4')">
+          <div class="tarjeta-texto">Próximas Campañas</div>
+        </div>
+      </div>
+
+      <!-- Detalle 1: Operación Sonrisa -->
+      <div class="detalle" id="detalle1">
+        <button class="boton-atras" onclick="volver()">
+          <span class="flecha-atras">⬅</span>Volver
+        </button>
+
+        <div class="card">
+          <h2 class="card-title">Operación Sonrisa</h2>
+          <p>
+            Operación Sonrisa es una organización internacional sin fines de
+            lucro que proporciona <b>cirugías gratuitas</b> y atención integral
+            a niños y adultos con malformaciones faciales, como el
+            <b>labio leporino</b> y el <b>paladar hendido</b>, para que puedan
+            tener una mejor calidad de vida.
+          </p>
+
+          <h3>¿Qué es Operación Sonrisa?</h3>
+          <ul>
+            <li>
+              <b>Misión:</b> Brindar acceso a atención quirúrgica y apoyo a
+              personas, especialmente niños, con labio y paladar hendido.
+            </li>
+            <li>
+              <b>Fundadores:</b> Dr. Bill Magee y Kathy Magee, quienes iniciaron
+              la organización en 1981.
+            </li>
+            <li>
+              <b>Enfoque:</b> Atención integral: cirugía, apoyo médico,
+              psicológico y logístico.
+            </li>
+          </ul>
+
+          <h3>¿Cómo funciona?</h3>
+          <ol>
+            <li>
+              <b>Evaluación médica:</b> Revisión general para asegurar que el
+              paciente está apto para cirugía.
+            </li>
+            <li>
+              <b>Cirugía:</b> Intervención bajo anestesia general y
+              recuperación.
+            </li>
+            <li><b>Atención postoperatoria:</b> Seguimiento y cuidados.</li>
+          </ol>
+
+          <div class="videos">
+            <iframe
+              width="400"
+              height="225"
+              src="https://www.youtube.com/embed/oHg5SJYRHA0"
+              title="Video educativo sobre paladar hendido"
+              frameborder="0"
+              allowfullscreen></iframe>
+            <iframe
+              width="400"
+              height="225"
+              src="https://www.youtube.com/embed/V7C8EEul-bk"
+              title="Cómo se trata el paladar hendido"
+              frameborder="0"
+              allowfullscreen></iframe>
+          </div>
+        </div>
+      </div>
+
+      <!-- Detalle 2: Rotary -->
+      <div class="detalle" id="detalle2">
+        <button class="boton-atras" onclick="volver()">
+          <span class="flecha-atras">⬅</span>Volver
+        </button>
+
+        <section class="campaña">
+          <h2>🌍 Rotary International: Gente de Acción</h2>
+          <p>
+            Un <strong>club rotario</strong> es una organización de
+            profesionales y líderes cívicos que trabajan juntos para brindar
+            servicio en sus comunidades y a nivel mundial. Fundado en
+            <strong>1905</strong>, <strong>Rotary</strong> promueve la
+            integridad, el compañerismo y la paz a través de proyectos en áreas
+            como salud, educación y lucha contra la pobreza.
+          </p>
+
+          <h3>🔹 ¿Qué es Rotary?</h3>
+          <ul>
+            <li>
+              <strong>Organización mundial:</strong> Más de
+              <strong>1.2 millones</strong> de miembros en más de
+              <strong>46,000 clubes</strong>.
+            </li>
+            <li>
+              <strong>Gente de acción:</strong> Personas comprometidas con
+              resolver problemas locales y globales.
+            </li>
+            <li>
+              <strong>Objetivos:</strong> Servir, promover integridad y fomentar
+              la paz.
+            </li>
+          </ul>
+
+          <h3>💡 ¿Qué hace Rotary?</h3>
+          <ul>
+            <li>
+              <strong>Proyectos:</strong> Vacunación, agua potable,
+              alfabetización, apoyo estudiantil.
+            </li>
+            <li>
+              <strong>Liderazgo juvenil:</strong> Programas
+              <strong>Interact</strong> y <strong>Rotaract</strong>.
+            </li>
+            <li>
+              <strong>Intercambio:</strong> Jóvenes de 15–19 años viajan a otros
+              países para aprender idiomas y culturas.
+            </li>
+            <li>
+              <strong>Promoción de la paz:</strong> Becas, seminarios y
+              programas internacionales.
+            </li>
+          </ul>
+
+          <p class="mensaje-final">
+            💫 Rotary demuestra que la solidaridad no tiene fronteras: cuando
+            las manos se unen, el cambio es posible.
+          </p>
+        </section>
+      </div>
+
+      <!-- Detalle 3: Achacachi -->
+      <div class="detalle" id="detalle3">
+        <button class="boton-atras" onclick="volver()">
+          <span class="flecha-atras">⬅</span>Volver
+        </button>
+
+        <section class="campaña">
+          <h2>🩺 Campaña de Cirugías Gratuitas en Achacachi</h2>
+          <p>
+            La campaña para el <strong>labio leporino</strong> y
+            <strong>paladar hendido</strong> en <strong>Achacachi</strong> se
+            realiza junto al Gobierno Autónomo Municipal, el Hospital Municipal,
+            <strong>Telesalud</strong> y la <strong>Fundación Jiwaki</strong>.
+          </p>
+          <ul>
+            <li>
+              Ofrece tratamientos quirúrgicos gratuitos a niños de Achacachi y
+              municipios vecinos.
+            </li>
+            <li>Incluye una fase de valoración médica previa a la cirugía.</li>
+          </ul>
+          <p class="mensaje-final">
+            💙 Esta iniciativa busca devolver sonrisas y esperanza a las
+            familias.
+          </p>
+        </section>
+      </div>
+
+      <!-- Detalle 4: Próximas -->
+      <div class="detalle" id="detalle4">
+        <button class="boton-atras" onclick="volver()">
+          <span class="flecha-atras">⬅</span>Volver
+        </button>
+        <h2>Próximas Campañas</h2>
+        <p>
+          Próximamente más campañas estarán disponibles. ¡Mantente atento a
+          nuevas publicaciones!
+        </p>
+      </div>
+    </div>
+
+    <script>
+      function toggleMenu() {
+        const menu = document.getElementById("menu");
+        menu.classList.toggle("activo");
+      }
+
+      function mostrarDetalle(id) {
+        document.getElementById("tarjetas").style.display = "none";
+        document
+          .querySelectorAll(".detalle")
+          .forEach((d) => d.classList.remove("activo"));
+        document.getElementById(id).classList.add("activo");
+      }
+
+      function volver() {
+        document
+          .querySelectorAll(".detalle")
+          .forEach((d) => d.classList.remove("activo"));
+        document.getElementById("tarjetas").style.display = "flex";
+      }
+    </script>
+  </body>
+</html>

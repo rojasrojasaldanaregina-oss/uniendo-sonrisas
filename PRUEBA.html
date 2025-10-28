@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalles - Nombre del Hospital</title>
+    
+    <style>
+        /* --- ESTILOS GENERALES --- */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f2f5;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        .container {
+            max-width: 900px; /* Un poco más angosto para leer mejor */
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+
+        /* --- BARRA DE NAVEGACIÓN (NAVBAR) --- */
+        /* ES EXACTAMENTE EL MISMO CÓDIGO CSS DE LA OTRA PÁGINA */
+        .navbar {
+            background-color: #004a99;
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .navbar-brand {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: white;
+            text-decoration: none;
+        }
+        #menu-toggle { display: none; }
+        .menu-icon { display: none; cursor: pointer; padding: 10px; }
+        .menu-icon span { display: block; width: 25px; height: 3px; background-color: white; margin: 5px 0; transition: 0.3s; }
+        .menu-links { list-style: none; margin: 0; padding: 0; display: flex; }
+        .menu-links li { margin-left: 20px; }
+        .menu-links a { color: white; text-decoration: none; font-size: 1em; padding: 5px; }
+        .menu-links a:hover { text-decoration: underline; }
+        
+        @media (max-width: 768px) {
+            .menu-icon { display: block; }
+            .menu-links { display: none; position: absolute; top: 65px; left: 0; background-color: #004a99; width: 100%; flex-direction: column; text-align: center; padding: 10px 0; }
+            .menu-links li { margin: 10px 0; }
+            #menu-toggle:checked ~ .menu-links { display: flex; }
+        }
+
+        /* --- BOTÓN DE "ATRÁS" --- */
+        .btn-atras {
+            display: inline-block;
+            margin: 20px 0 10px 0;
+            padding: 10px 18px;
+            background-color: #555; /* Un color neutro */
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background-color 0.2s;
+        }
+        .btn-atras:hover {
+            background-color: #333;
+        }
+
+        /* --- CONTENIDO DEL DETALLE --- */
+        .detalle-contenido {
+            background-color: #ffffff;
+            padding: 25px 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .detalle-contenido h1 {
+            color: #004a99;
+            margin-top: 0;
+        }
+
+        .detalle-contenido img.detalle-img {
+            width: 100%;
+            height: 300px; /* Alto de la imagen de cabecera */
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        
+        .detalle-contenido h2 {
+            color: #004a99;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 5px;
+            margin-top: 30px;
+        }
+
+        .detalle-contenido p {
+            line-height: 1.6;
+            font-size: 1.1em;
+        }
+        
+        .detalle-contenido ul {
+            list-style: none;
+            padding-left: 0;
+            font-size: 1.1em;
+        }
+        
+        .detalle-contenido ul li {
+            margin-bottom: 12px;
+        }
+        
+        .detalle-contenido ul li strong {
+            min-width: 100px;
+            display: inline-block;
+            color: #555;
+        }
+
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <a href="index.html" class="navbar-brand">LABIO LEPORINO</a>
+        <input type="checkbox" id="menu-toggle">
+        <label for="menu-toggle" class="menu-icon">
+            <span></span>
+            <span></span>
+            <span></span>
+        </label>
+        <ul class="menu-links">
+            <li><a href="index.html">Inicio (¿Qué es?)</a></li>
+            <li><a href="paladar-hendido.html">Paladar Hendido</a></li>
+            <li><a href="hospitales.html">Hospitales y Ayuda</a></li>
+            <li><a href="consejos.html">Consejos</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+
+        <a href="javascript:history.back()" class="btn-atras">← Volver a la lista</a>
+
+        <div class="detalle-contenido">
+
+            <h1>Nombre del Hospital / Fundación</h1>
+
+            <img src="https://via.placeholder.com/800x300.png?text=Foto+Grande+del+Lugar" alt="Foto principal" class="detalle-img">
+
+            <h2>Descripción Completa</h2>
+            <p>
+                Aquí puedes escribir todo lo que quieras. Uno o varios párrafos
+                explicando a fondo qué hace esta fundación, quiénes son,
+                cuál es su misión, si las cirugías son gratuitas, etc.
+            </p>
+            <p>
+                Puedes agregar más párrafos sin problema.
+            </p>
+
+            <h2>Información de Contacto</h2>
+            <ul>
+                <li><strong>Dirección:</strong> Av. 16 de Julio (El Prado) #1234, La Paz</li>
+                <li><strong>Zona:</strong> Zona Central</li>
+                <li><strong>Teléfono:</strong> 2 2123456</li>
+                <li><strong>Whatsapp:</strong> 77712345</li>
+                <li><strong>Horarios:</strong> Lunes a Viernes, 8:00 - 16:00</li>
+                <li><strong>Facebook:</strong> <a href="#">facebook.com/pagina</a></li>
+                <li><strong>Sitio Web:</strong> <a href="#">www.paginaoficial.com</a></li>
+            </ul>
+
+            <h2>Servicios que ofrecen</h2>
+            <ul>
+                <li>✔️ Cirugías reconstructivas</li>
+                <li>✔️ Terapia de lenguaje</li>
+                <li>✔️ Apoyo psicológico a familias</li>
+                <li>✔️ Banco de leche</li>
+            </ul>
+            
+            <h2>Ubicación (Mapa)</h2>
+            <p>
+                Aquí puedes ir a Google Maps, buscar el lugar, hacer clic en "Compartir" -> "Insertar un mapa"
+                y pegar el código (empieza con <iframe...>) aquí mismo.
+            </p>
+            </div> </div> </body>
+</html>
